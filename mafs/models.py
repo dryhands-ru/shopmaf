@@ -1,18 +1,26 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
 
 
-class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
+class Category(models.Model):
+    title = models.CharField(verbose_name="Название категории", max_length=200)
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def __str__(self):
+        return self.title
+
+
+class CategoryItem(models.Model):
+    block = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='items')
+    picture = models.ImageField(verbose_name='Картинка', upload_to='img', default='/../media/img/template_services.jpg')
+    title = models.CharField(max_length=80, default="", verbose_name="Артикул")
+    yandex_disk_url = models.URLField(verbose_name='Ссылка на Яндекс.Диск', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Артикул'
+        verbose_name_plural = 'Артикулы'
 
     def __str__(self):
         return self.title
