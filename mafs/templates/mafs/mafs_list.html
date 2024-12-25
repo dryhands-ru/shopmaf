@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои модели</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .category-card {
+            cursor: pointer;
+            margin-bottom: 20px;
+            margin-right: 16px;
+        }
+        .gallery {
+    display: none; /* Изначально скрыто */
+    flex-wrap: wrap; /* Чтобы элементы переходили на новую строку */
+    gap: 16px; /* Расстояние между элементами */
+}
+
+.gallery.d-flex {
+    display: flex;
+}
+        .gallery img {
+            width: 128px;
+            height: 128px;
+            object-fit: contain;
+            border: 1px solid #ccc;
+            border-radius: 32px;
+        }
+        .model-name {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .search-results {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .search-results img {
+            width: 128px;
+            height: 128px;
+            object-fit: contain;
+            border: 1px solid #ccc;
+            border-radius: 32px;
+        }
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .search-container label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .search-input {
+            position: relative;
+            width: 64%;
+        }
+        .search-input input {
+            width: 100%;
+            height: 36px;
+    border-radius: 12px;
+        }
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+.search-input, label,h1,h5, .model-name {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+a {
+    text-decoration: none;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Категории моделей</h1>
+
+    <!-- Поисковая строка с иконкой лупы -->
+    <div class="search-container mb-4">
+        <label for="searchInput">Поиск:</label>
+        <div class="search-input">
+            <input type="text" id="searchInput" class="form-control" placeholder="Введите название модели...">
+            <span class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <!-- Результаты поиска -->
+    <div id="searchResults" class="search-results"></div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card category-card" data-target="#gallery1">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Лавки и урны</h5>
+                </div>
+            </div>
+            <div id="gallery1" class="gallery">
+                <a href="https://disk.yandex.ru/d/pW2NobT8wG_yKw" target="_blank">
+                    <img src="URNA.png" alt="Модель 1">
+                    <div class="model-name">urna</div>
+                </a>
+                <a href="https://yadi.sk/d/example-link2" target="_blank">
+                    <img src="image2.jpg" alt="Модель 2">
+                    <div class="model-name">Модель 2</div>
+                </a>
+                <a href="https://yadi.sk/d/example-link3" target="_blank">
+                    <img src="image3.jpg" alt="Модель 3">
+                    <div class="model-name">urna2</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card category-card" data-target="#gallery2">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Тренажёры</h5>
+                </div>
+            </div>
+            <div id="gallery2" class="gallery">
+                <a href="https://disk.yandex.ru/d/zui7BwdktI-sOw" target="_blank">
+                    <img src="7703.png" alt="Модель 4">
+                    <div class="model-name">7703</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/p96CVUuuCpGOBw" target="_blank">
+                    <img src="7709.png" alt="Модель 5">
+                    <div class="model-name">7709</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/TlOOD_arqnlCLg" target="_blank">
+                    <img src="7714.png" alt="Модель 6">
+                    <div class="model-name">7714</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/uikRWO3s13IgZQ" target="_blank">
+                    <img src="7717.png" alt="Модель 4">
+                    <div class="model-name">7717</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/tp9-0PiTKZSQOw" target="_blank">
+                    <img src="7721.png" alt="Модель 5">
+                    <div class="model-name">7721</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/cdE51whjYaTMqg" target="_blank">
+                    <img src="7726.png" alt="Модель 6">
+                    <div class="model-name">7726</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/UuOmF7t1J1rNlg" target="_blank">
+                    <img src="7732.png" alt="Модель 4">
+                    <div class="model-name">7732</div>
+                </a>
+                <a href="https://disk.yandex.ru/d/msA-81iZ0DL5oQ" target="_blank">
+                    <img src="7736.png" alt="Модель 5">
+                    <div class="model-name">7736</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card category-card" data-target="#gallery3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Категория 3</h5>
+                </div>
+            </div>
+            <div id="gallery3" class="gallery">
+                <a href="https://yadi.sk/d/example-link7" target="_blank">
+                    <img src="image7.jpg" alt="Модель 7">
+                    <div class="model-name">Модель 7</div>
+                </a>
+                <a href="https://yadi.sk/d/example-link8" target="_blank">
+                    <img src="image8.jpg" alt="Модель 8">
+                    <div class="model-name">Модель 8</div>
+                </a>
+                <a href="https://yadi.sk/d/example-link9" target="_blank">
+                    <img src="image9.jpg" alt="Модель 9">
+                    <div class="model-name">Модель 9</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Показать/скрыть галерею
+        $('.category-card').click(function() {
+            var target = $(this).data('target');
+            var $gallery = $(target);
+            if ($gallery.hasClass('d-flex')) {
+                $gallery.removeClass('d-flex').hide();
+            } else {
+                $gallery.addClass('d-flex').show();
+            }
+        });
+
+        // Обработка клика по иконке лупы
+        $('.search-icon').click(function() {
+            performSearch();
+        });
+
+        // Обработка нажатия Enter в поле ввода
+        $('#searchInput').on('keypress', function(e) {
+            if (e.which === 13) {
+                performSearch();
+            }
+        });
+
+        // Функция поиска моделей
+        function performSearch() {
+            var query = $('#searchInput').val().toLowerCase();
+            var results = '';
+
+            $('.gallery a').each(function() {
+                var modelName = $(this).find('.model-name').text().toLowerCase();
+                if (modelName.includes(query)) {
+                    results += '<a href="' + $(this).attr('href') + '" target="_blank">' +
+                               $(this).html() + '</a>';
+                }
+            });
+
+            $('#searchResults').html(results);
+        }
+    });
+</script>
+
+</body>
+</html>

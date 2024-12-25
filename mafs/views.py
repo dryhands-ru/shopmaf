@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def mafs_list(request):
+    return render(request, 'mafs/mafs_list.html', {})
