@@ -8,67 +8,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'mafs/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'mafs/css/style.css' %}">
 </head>
 <body>
-{#<div class="container mt-5">#}
-{#    <h1 class="text-center mb-5">Категории моделей</h1>#}
-{##}
-{#    <!-- Поисковая строка -->#}
-{#    <div class="search-container mb-4">#}
-{#        <label for="searchInput">Поиск:</label>#}
-{#        <div class="search-input d-flex">#}
-{#            <input type="text" id="searchInput" class="form-control" placeholder="Введите название модели...">#}
-{#            <span class="search-icon">#}
-{#                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">#}
-{#                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>#}
-{#                </svg>#}
-{#            </span>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#    <!-- Категории -->#}
-{#    <div class="row">#}
-{#        {% for category in categories %}#}
-{#        <div class="col-md-4 mb-4">#}
-{#            <div class="card category-card">#}
-{#                <div class="card-body text-center">#}
-{#                    <h5 class="card-title">{{ category.title }}</h5>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="gallery">#}
-{#                {% for item in category.items.all %}#}
-{#                <a href="{{ item.yandex_disk_url }}" target="_blank" class="d-block mb-2">#}
-{#                    <img src="{{ item.picture.url }}" alt="{{ item.title }}" class="img-fluid">#}
-{#                    <div class="model-name">{{ item.title }}</div>#}
-{#                </a>#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#</div>#}
 <div class="container mt-5">
     <h1 class="text-center mb-5">Категории моделей</h1>
 
-    <!-- Поисковая строка -->
-    <div class="search-container mb-4">
-        <label for="searchInput">Поиск:</label>
-        <div class="search-input d-flex">
-            <input type="text" id="searchInput" class="form-control" placeholder="Введите название модели...">
-            <span class="search-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </span>
-        </div>
+<div class="search-container mb-4">
+    <label for="searchInput">Поиск:</label>
+    <div class="search-input d-flex">
+        <input type="text" id="searchInput" class="form-control" placeholder="Введите артикул модели...">
+        <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </span>
     </div>
+</div>
+
+<!-- Контейнер для результатов поиска -->
+<div id="searchResults" class="search-results"></div>
 
     <!-- Категории -->
     <div class="row">
         {% for category in categories %}
-        <div class="col-md-4 mb-4">
+        <div class="col flex-none">
             <!-- Добавляем data-target с уникальным id галереи -->
             <div class="card category-card" data-target="#gallery-{{ category.id }}">
                 <div class="card-body text-center">
@@ -79,7 +44,7 @@
             <!-- Галерея с уникальным id для каждой категории -->
             <div id="gallery-{{ category.id }}" class="gallery" style="display: none;">
                 {% for item in category.items.all %}
-                <a href="{{ item.yandex_disk_url }}" target="_blank" class="d-block mb-2">
+                <a href="{{ item.yandex_disk_url }}" target="_blank" class="d-block maf_link">
                     <img src="{{ item.picture.url }}" alt="{{ item.title }}" class="img-fluid">
                     <div class="model-name">{{ item.title }}</div>
                 </a>
@@ -91,7 +56,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'mafs/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'mafs/js/main.js' %}"></script>
 </body>
 </html>

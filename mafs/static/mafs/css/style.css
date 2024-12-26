@@ -1,17 +1,34 @@
-.category-card {
-    cursor: pointer;
-    margin-bottom: 20px;
-    margin-right: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+@font-face {
+    font-family: 'montserrat-bold';
+    src: url('fonts/montserrat-bold.otf') format('otf'),
+         url('fonts/montserrat-bold.ttf') format('ttf'),
+    font-weight: normal;
+    font-style: normal;
 }
 
-.gallery {
-    display: none; /* Изначально скрыто */
-    flex-wrap: wrap; /* Чтобы элементы переходили на новую строку */
-    gap: 16px; /* Расстояние между элементами */
-    justify-content: flex-start; /* Чтобы элементы выравнивались слева */
+/* Применение шрифта на странице */
+body {
+    font-family: 'montserrat-bold', sans-serif;
+    background: url('../img/background.jpg') no-repeat center center fixed;
+    background-size: cover; /* Подгоняет изображение по размеру экрана */
 }
+
+.category-card {
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0px 16px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+.maf_link {
+    max-width: 132px;
+    margin-right: 8px;
+}
+/*.gallery {*/
+/*    display: none; !* Изначально скрыто *!*/
+/*    flex-wrap: wrap; !* Чтобы элементы переходили на новую строку *!*/
+/*    gap: 16px; !* Расстояние между элементами *!*/
+/*    justify-content: flex-start; !* Чтобы элементы выравнивались слева *!*/
+/*}*/
 
 .gallery img {
     width: 128px;
@@ -19,6 +36,8 @@
     object-fit: contain;
     border: 1px solid #ccc;
     border-radius: 32px;
+    background-color: #fff;
+    padding: 16px;
 }
 
 .model-name {
@@ -77,17 +96,81 @@
 }
 
 .search-input, label,h1,h5, .model-name {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
+    font-family: "montserrat-bold", sans-serif;
+    font-weight: 800;
     font-style: normal;
+    text-transform: uppercase;
 }
-
-.roboto-bold {
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
 a {
     text-decoration: none;
+    color: #000!important;
 }
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.search-results a {
+    text-decoration: none;
+    width: 128px;
+    height: auto;
+    /*border: 1px solid #ccc;*/
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    font-size: 14px;
+    background-color: #fff;
+    color: #000;
+}
+.search-results img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    padding: 16px;
+}
+input {
+    border: none; /* Убирает обводку */
+    outline: none; /* Убирает обводку при фокусировке */
+    background: transparent; /* Убирает фон */
+    box-shadow: none; /* Убирает тень при фокусировке */
+}
+
+/* Если нужно, чтобы эффекты при наведении тоже исчезли */
+input:hover, input:focus {
+    border-color: transparent!important;
+    box-shadow: 0 0 16px 0rem rgb(17 61 127 / 46%)!important;
+}
+
+.flex-none {
+    flex: auto!important;
+}
+
+.gallery {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s 0.5s; /* Плавная анимация */
+}
+
+.gallery.open {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0s 0s; /* Отменяем задержку */
+}
+
+#searchResults {
+    display: none; /* Изначально скрыто */
+    /*position: absolute;*/
+    background-color: #fff;
+    width: 100%;
+    /*z-index: 9999;*/
+    /*border: 1px solid #ccc;*/
+    border-radius: 16px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
