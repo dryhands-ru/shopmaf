@@ -22,30 +22,25 @@ body {
 .maf_link {
     max-width: 132px;
     margin-right: 8px;
+    position: relative;
 }
-/*.gallery {*/
-/*    display: none; !* Изначально скрыто *!*/
-/*    flex-wrap: wrap; !* Чтобы элементы переходили на новую строку *!*/
-/*    gap: 16px; !* Расстояние между элементами *!*/
-/*    justify-content: flex-start; !* Чтобы элементы выравнивались слева *!*/
-/*}*/
-
 .gallery img {
     width: 128px;
     height: 128px;
     object-fit: contain;
     border: 1px solid #ccc;
-    border-radius: 32px;
+    border-radius: 32px 32px 32px 16px;
     background-color: #fff;
-    padding: 16px;
+    padding: 16px 16px 32px;
 }
 
 .model-name {
     text-align: center;
     font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 10px;
     display: block;
+    position: absolute;
+    bottom: 4px;
+    left: 12%;
 }
 
 .search-results {
@@ -54,14 +49,6 @@ body {
     gap: 16px;
     justify-content: flex-start;
     margin-top: 20px;
-}
-
-.search-results img {
-    width: 128px;
-    height: 128px;
-    object-fit: contain;
-    border: 1px solid #ccc;
-    border-radius: 32px;
 }
 
 .search-container {
@@ -116,21 +103,19 @@ a {
 .search-results a {
     text-decoration: none;
     width: 128px;
-    height: auto;
-    /*border: 1px solid #ccc;*/
+    border: 1px solid transparent;
     border-radius: 8px;
-    padding: 10px;
-    text-align: center;
     display: block;
     font-size: 14px;
     background-color: #fff;
     color: #000;
 }
 .search-results img {
-    width: 100%;
-    height: auto;
     border-radius: 8px;
-    padding: 16px;
+    padding: 8px 8px 32px;
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
 }
 input {
     border: none; /* Убирает обводку */
@@ -160,6 +145,7 @@ input:hover, input:focus {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.5s ease, visibility 0s 0s; /* Отменяем задержку */
+    margin-bottom: 16px;
 }
 
 #searchResults {
@@ -173,4 +159,6 @@ input:hover, input:focus {
     max-height: 200px;
     overflow-y: auto;
 }
-
+.card-title {
+    margin-bottom: 0!important;
+}
