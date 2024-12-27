@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopMAF</title>
+    <link rel="icon" href="{% static 'mafs/img/favicon.svg' %}" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'mafs/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'mafs/css/style.css' %}">
 </head>
@@ -26,36 +28,110 @@
     <div id="searchResults" class="search-results">
     </div>
     <!-- Категории -->
-    <div class="row">
-        {% for category in categories %}
-        <div class="col flex-none">
-            <!-- Добавляем data-target с уникальным id галереи -->
-            <div class="card category-card" data-target="#gallery-{{ category.id }}">
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ category.title }}</h5>
-                </div>
-            </div>
+{#    <div class="row">#}
+{#        {% for category in categories %}#}
+{#        <div class="col flex-none">#}
+{#            <!-- Добавляем data-target с уникальным id галереи -->#}
+{#            <div class="card category-card" data-target="#gallery-{{ category.id }}">#}
+{#                <div class="card-body text-center">#}
+{#                    <h5 class="card-title">{{ category.title }}</h5>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <!-- Галерея с уникальным id для каждой категории -->#}
+{#            <div id="gallery-{{ category.id }}" class="gallery" style="display: none;">#}
+{#                {% for item in category.items.all %}#}
+{#                <a href="{{ item.yandex_disk_url }}" target="_blank" class="d-block maf_link">#}
+{#                    <img src="{{ item.picture.url }}" alt="{{ item.title }}" class="img-fluid">#}
+{#                    <div class="model-name">{{ item.title }}</div>#}
+{#                    <div class="model-dimensions">{{ item.dimensions }}</div>#}
+{#                </a>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
 
-            <!-- Галерея с уникальным id для каждой категории -->
-            <div id="gallery-{{ category.id }}" class="gallery" style="display: none;">
-                {% for item in category.items.all %}
-                <a href="{{ item.yandex_disk_url }}" target="_blank" class="d-block maf_link">
-                    <img src="{{ item.picture.url }}" alt="{{ item.title }}" class="img-fluid">
-                    <div class="model-name">{{ item.title }}</div>
-                </a>
-                {% endfor %}
+<div class="row">
+    {% for category in categories %}
+    <div class="col flex-none">
+        <div class="card category-card" data-target="#gallery-{{ category.id }}">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ category.title }}</h5>
             </div>
         </div>
-        {% endfor %}
+
+        <div id="gallery-{{ category.id }}" class="gallery" style="display: none;">
+            {% for item in category.items.all %}
+            <a href="{{ item.yandex_disk_url }}" target="_blank" class="d-block maf_link"
+               data-category="{{ category.title }}"
+               data-articul="{{ item.title }}"
+               data-dimensions="{{ item.dimensions }}"
+               data-image="{{ item.picture.url }}">
+                <img src="{{ item.picture.url }}" alt="{{ item.title }}" class="img-fluid">
+                <div class="model-name">{{ item.title }}</div>
+                <div class="model-dimensions">{{ item.dimensions }}</div>
+                <button class="btn btn-success add-to-cart">
+                    <i class="bi bi-plus"></i>
+                </button>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+</div>
+
+<!-- Статическая часть футера для больших экранов -->
+<div class="footer d-none d-sm-block">
+    <!-- Кнопка для открытия модального окна -->
+    <button id="modalButton" class="my_modal_btn btn btn-secondary">0</button>
+
+    <!-- Логотипы для больших экранов -->
+    <img class="logo_1" src="{% static 'mafs/img/лого.png' %}" alt="">
+    <img class="logo_1" src="{% static 'mafs/img/Group 45156.png' %}" alt="">
+    <img class="logo_1" src="{% static 'mafs/img/vitamin_WM.png' %}" alt="">
+</div>
+
+<!-- Статическая часть футера для мобильных экранов -->
+<div class="footer_mobile d-block d-sm-none">
+    <!-- Логотипы для мобильных экранов -->
+    <img class="logo_2" src="{% static 'mafs/img/лого.png' %}" alt="">
+    <img class="logo_2" src="{% static 'mafs/img/Group 45156.png' %}" alt="">
+    <img class="logo_2" src="{% static 'mafs/img/vitamin_WM.png' %}" alt="">
+</div>
+
+<!-- Модальное окно для отображения данных -->
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataModalLabel">Список</h5>
+                <!-- Кнопка закрытия модального окна -->
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="
+    border: transparent;
+    background-color: transparent;
+    margin-left: auto;
+">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalContent">
+                <!-- Содержимое модального окна будет добавлено через JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <!-- Кнопка для закрытия модального окна -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
     </div>
 </div>
 
-    <div class="footer d-none d-sm-block">
-        <img class="logo_1" src="{% static 'mafs/img/лого.png' %}" alt="">
-    </div>
-    <div class="footer_mobile d-block d-sm-none">
-        <img class="logo_2" src="{% static 'mafs/img/лого.png' %}" alt="">
-    </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'mafs/js/bootstrap.bundle.min.js' %}"></script>

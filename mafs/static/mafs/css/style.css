@@ -20,18 +20,17 @@ body {
     margin-bottom: 16px;
 }
 .maf_link {
-    max-width: 132px;
     margin-right: 8px;
     position: relative;
 }
 .gallery img {
-    width: 128px;
-    height: 128px;
+    width: 180px;
+    height: 180px;
     object-fit: contain;
     border: 1px solid #ccc;
     border-radius: 32px 32px 32px 16px;
     background-color: #fff;
-    padding: 16px 16px 32px;
+    padding: 0px 0px 48px;
 }
 
 .model-name {
@@ -39,10 +38,17 @@ body {
     font-size: 14px;
     display: block;
     position: absolute;
-    bottom: 4px;
+    bottom: 24px;
     left: 12%;
 }
-
+.model-dimensions {
+    text-align: center;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    bottom: 8px;
+    left: 12%;
+}
 .search-results {
     display: flex;
     flex-wrap: wrap;
@@ -102,7 +108,7 @@ a {
 }
 .search-results a {
     text-decoration: none;
-    width: 128px;
+    width: 180px;
     border: 1px solid transparent;
     border-radius: 8px;
     display: block;
@@ -112,9 +118,9 @@ a {
 }
 .search-results img {
     border-radius: 8px;
-    padding: 8px 8px 32px;
-    width: 128px;
-    height: 128px;
+    padding: 0px 0px 32px;
+    width: 180px;
+    height: 200px;
     object-fit: contain;
 }
 input {
@@ -128,6 +134,15 @@ input {
 input:hover, input:focus {
     border-color: transparent!important;
     box-shadow: 0 0 16px 0rem rgb(17 61 127 / 46%)!important;
+}
+
+.add-to-cart {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    width: 30px;
+    border-radius: 50%;
+    padding: 2px;
 }
 
 .flex-none {
@@ -156,7 +171,6 @@ input:hover, input:focus {
     /*z-index: 9999;*/
     /*border: 1px solid #ccc;*/
     border-radius: 16px;
-    max-height: 200px;
     overflow-y: auto;
 }
 .card-title {
@@ -181,13 +195,29 @@ input:hover, input:focus {
 }
 .logo_1 {
     width: 52px;
-    padding-top: 16px;
+    padding-top: 42px;
     padding-left: 8px;
 }
 .logo_2 {
     width: 64px;
     padding-top: 12px;
-    padding-left: 16px;
+    padding-left: 24px;
+}
+
+.img-fluid_modal {
+    margin-left: auto;
+    width: 124px;
+    overflow: hidden;
+}
+.my_modal_btn {
+    position: absolute;
+    border-radius: 0 32px;
+    bottom: 0px;
+    left: 0px;
+    width: 58px;
+}
+.wrapper {
+
 }
 
 @media (min-width: 576px) {
