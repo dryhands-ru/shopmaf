@@ -25,7 +25,7 @@
         </div>
     </div>
     <!-- Контейнер для результатов поиска -->
-    <div id="searchResults" class="search-results">
+    <div id="searchResults" class="search-results d-flex">
     </div>
     <!-- Категории -->
 {#    <div class="row">#}
@@ -125,6 +125,7 @@
             </div>
             <div class="modal-footer">
                 <!-- Кнопка для закрытия модального окна -->
+                <button id="generateTableButton" type="button" class="btn btn-primary">Пуск</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
             </div>
         </div>
@@ -132,6 +133,8 @@
 </div>
 
 
+<!-- Добавьте библиотеку SheetJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'mafs/js/bootstrap.bundle.min.js' %}"></script>
