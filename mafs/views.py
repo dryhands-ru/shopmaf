@@ -12,6 +12,13 @@ import json
 import traceback
 import urllib.parse
 import time  # Импортируем time для генерации уникальных имен файлов
+from io import BytesIO
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from django.http import JsonResponse, HttpResponse
+from fpdf import FPDF
+import json
+import traceback  # Для подробного отображения ошибок
 
 
 def cat_list(request):
@@ -80,3 +87,48 @@ def generate_table(request):
             return JsonResponse({'error': str(e), 'trace': traceback.format_exc()})
 
     return JsonResponse({'error': 'Invalid method'}, status=405)
+
+
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+
+def generate_pdf(request):
+    if request.method == 'POST':
+        try:
+            # Чтение данных из запроса
+            data = json.loads(request.body)
+            items = data.get('items', [])
+
+            if not items:
+                return JsonResponse({'error': 'Нет данных для создания PDF'}, status=400)
+
+            # Создание PDF с использованием ReportLab
+            response = HttpResponse(content_type="application/pdf")
+            response["Content-Disposition"] = 'inline; filename="modal_content.pdf"'
+
+            c = canvas.Canvas(response, pagesize=letter)
+            c.setFont("Helvetica", 12)
+
+            y_position = 750  # Начальная позиция для текста
+
+            for item in items:
+                c.drawString(100, y_position, f"Категория: {item['category']}")
+                y_position -= 20
+                c.drawString(100, y_position, f"Артикул: {item['article']}")
+                y_position -= 20
+                c.drawString(100, y_position, f"Габариты: {item['dimensions']}")
+                y_position -= 40  # Оставляем пространство между блоками текста
+
+            c.showPage()
+            c.save()
+            return response
+
+        except Exception as e:
+            # Логирование ошибки для дальнейшего анализа
+            print(f"Error occurred: {str(e)}")
+            print(traceback.format_exc())  # Выводим подробную информацию об ошибке в логи
+            return JsonResponse({'error': str(e), 'trace': traceback.format_exc()}, status=500)
+
+    return JsonResponse({'error': 'Invalid method'}, status=405)
+

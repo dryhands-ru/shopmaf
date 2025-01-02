@@ -183,3 +183,40 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).on('click', '#generatePdfButton', function () {
+    if (selectedData.length === 0) {
+        alert("Выберите хотя бы один товар для создания PDF!");
+        return;
+    }
+
+    // Отправка данных на сервер
+    $.ajax({
+        url: '/generate-pdf/',
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        data: JSON.stringify({ items: selectedData }),
+        contentType: 'application/json',
+        xhrFields: {
+            responseType: 'blob'  // Убедитесь, что сервер отправляет PDF в бинарном формате
+        },
+        success: function (blob) {
+            // Создаем ссылку для скачивания PDF
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'modal_content.pdf';  // Имя для скачиваемого файла
+            document.body.appendChild(link);
+            link.click();  // Автоматический клик по ссылке
+            document.body.removeChild(link);  // Убираем ссылку после скачивания
+            window.URL.revokeObjectURL(url);  // Освобождаем память
+        },
+        error: function (xhr, status, error) {
+            alert("Произошла ошибка при создании PDF. Попробуйте снова.");
+            console.error(error);
+        }
+    });
+});
+
